@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<a href="index.html"><button>Accueil</button></a>
+
+<br>
+<p>
+  Items à cuir (Q + type)
+</p>
+<textarea name="cuir_name" id="cuir_name" cols="20" rows="1" placeholder="ex: 35 roches"></textarea>
+<p>
+  Item à cuir (nom complet en anglais et en majuscule) : 
+</p>
+<textarea name="cuir_block" id="cuir_block" cols="20" rows="1"></textarea>
+<p>
+  Quantité d'items à cuir : 
+</p>
+<textarea name="cuir_q" id="cuir_q" cols="10" rows="1"></textarea> <br>
+<p>
+  Récompense (argent) : 
+</p>
+<textarea name="cuir_rec" id="cuir_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="cuir_id" id="cuir_id" cols="10" rows="1"></textarea> <br> <br> <br>
+
+
+<button class="cuir_t" id="cuir_t">Valider</button> <br> <br> <br>
+
+<script>
+
+cuir_t.addEventListener('click', () => {
+
+    function entierAleatoire(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let cuir_t = document.getElementById("cuir_t")
+  let cuir_name = document.getElementById("cuir_name").value;
+  let cuir_block = document.getElementById("cuir_block").value;
+  let cuir_rec = document.getElementById("cuir_rec").value;
+  let cuir_id = document.getElementById("cuir_id").value;
+  var entier = entierAleatoire(1, 150000000) + ":";
+  let cuir_q = document.getElementById("cuir_q").value;
+
+  let res = `endRewards:
+- id: moneyReward
+  money: ${cuir_rec}
+startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+name: casser ${cuir_name}
+endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+manager:
+  branches:
+    '0':
+      stages:
+        '0':
+          objects:
+            ${entier}
+              amount: ${cuir_q}
+              object: :
+                v: 3700
+                type: ${cuir_block}
+          stageType: MELT
+      endingStages: {}
+id: ${cuir_id}`
+
+navigator.clipboard.writeText(res)
+cuir_t.innerHTML = "Copié!"
+  
+});
+</script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<a href="index.html"><button>Accueil</button></a>
+
+<br>
+<p>
+  Blocks à poser (Q + type)
+</p>
+<textarea name="placer_name" id="placer_name" cols="20" rows="1" placeholder="ex: 35 roches"></textarea>
+<p>
+  Block à poser (nom complet en anglais et en majuscule) : 
+</p>
+<textarea name="placer_block" id="placer_block" cols="20" rows="1"></textarea>
+<p>
+  Quantité de blocks à poser : 
+</p>
+<textarea name="placer_q" id="placer_q" cols="10" rows="1"></textarea> <br>
+<p>
+  Récompense (argent) : 
+</p>
+<textarea name="placer_rec" id="placer_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="placer_id" id="placer_id" cols="10" rows="1"></textarea> <br> <br> <br>
+
+
+<button class="placer_t" id="placer_t">Valider</button> <br> <br> <br>
+
+<script>
+
+placer_t.addEventListener('click', () => {  
+
+    function entierAleatoire(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let placer_t = document.getElementById("placer_t")
+  let placer_name = document.getElementById("placer_name").value;
+  let placer_block = document.getElementById("placer_block").value;
+  let placer_rec = document.getElementById("placer_rec").value;
+  let placer_id = document.getElementById("placer_id").value;
+  var entier = entierAleatoire(1, 150000000) + ":";
+  let placer_q = document.getElementById("placer_q").value;
+
+  let res = `endRewards:
+- id: moneyReward
+  money: ${placer_rec}
+startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+name: casser ${placer_name}
+endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+manager:
+  branches:
+    '0':
+      stages:
+        '0':
+          objects:
+            ${entier}
+              amount: ${placer_q}
+              object: :${placer_block}
+          stageType: PLACE_BLOCKS
+      endingStages: {}
+id: ${placer_id}`
+
+navigator.clipboard.writeText(res)
+  placer_t.innerHTML = "Copié!"
+  
+});
+</script>

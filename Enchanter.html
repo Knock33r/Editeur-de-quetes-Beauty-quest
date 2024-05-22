@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<a href="index.html"><button>Accueil</button></a>
+
+<br>
+<p>
+  Items à enchanter (Q + type)
+</p>
+<textarea name="enchant_name" id="enchant_name" cols="20" rows="1" placeholder="ex: 1 plastron en fer"></textarea>
+<p>
+  Item à cuir (nom complet en anglais et en majuscule) : 
+</p>
+<textarea name="enchant_item" id="enchant_item" cols="20" rows="1"></textarea>
+<p>
+  Quantité d'items à enchanter : 
+</p>
+<textarea name="enchant_q" id="enchant_q" cols="10" rows="1"></textarea> <br>
+<p>
+  Récompense (argent) : 
+</p>
+<textarea name="enchant_rec" id="enchant_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="enchant_id" id="enchant_id" cols="10" rows="1"></textarea> <br> <br> <br>
+
+
+<button class="enchant_t" id="enchant_t">Valider</button> <br> <br> <br>
+
+<script>
+
+enchant_t.addEventListener('click', () => {
+
+    function entierAleatoire(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let enchant_t = document.getElementById("enchant_t")
+  let enchant_name = document.getElementById("enchant_name").value;
+  let enchant_item = document.getElementById("enchant_item").value;
+  let enchant_rec = document.getElementById("enchant_rec").value;
+  let enchant_id = document.getElementById("enchant_id").value;
+  var entier = entierAleatoire(1, 150000000) + ":";
+  let enchant_q = document.getElementById("enchant_q").value;
+
+  let res = `endRewards:
+- id: moneyReward
+  money: ${enchant_rec}
+startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+name: casser ${enchant_name}
+endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+manager:
+  branches:
+    '0':
+      stages:
+        '0':
+          objects:
+            ${entier}
+              amount: ${enchant_q}
+              object: :
+                v: 3700
+                type: ${enchant_item}
+          stageType: ENCHANT
+      endingStages: {}
+id: ${enchant_id}`
+
+navigator.clipboard.writeText(res)
+enchant_t.innerHTML = "Copié!"
+  
+});
+</script>

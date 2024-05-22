@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete ff</title>
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<a href="index.html"><button>Accueil</button></a>
+
+
+<p>
+  Animaux à apprivoiser (Q + type):
+</p>
+<textarea name="nourrir-info" id="nourrir-info" cols="20" rows="1" placeholder="ex: 5 vaches"></textarea>
+<p>
+  Animal à nourrir
+</p>
+
+
+<form name="Animal" id="form_animal" action="Apprivoiser.html" method="post"></form>
+
+<input type="radio" id="loup" name="Animal" value="WOLF">
+<label for="loup">Loup</label>
+
+<input type="radio" id="chat" name="Animal" value="CAT">
+<label for="chat">Chat</label>
+
+<input type="radio" id="camel" name="Animal" value="CAMEL">
+<label for="camel">Chameau</label>
+
+<input type="radio" id="horse" name="Animal" value="HORSE">
+<label for="horse">Cheval</label>
+
+<input type="radio" id="donkey" name="Animal" value="DONKEY">
+<label for="donkey">Ane</label>
+
+<input type="radio" id="parrot" name="Animal" value="PARROT">
+<label for="parrot">Perroquet</label>
+
+<input type="radio" id="TRADER_LLAMA" name="Animal" value="TRADER_LLAMA">
+<label for="TRADER_LLAMA">llama de marchand ambulant</label>
+
+<input type="radio" id="ZOMBIE_HORSE" name="Animal" value="ZOMBIE_HORSE">
+<label for="ZOMBIE_HORSE">cheval-zombie</label>
+
+<input type="radio" id="SKELETON_HORSE" name="Animal" value="SKELETON_HORSE">
+<label for="SKELETON_HORSE">cheval-squelette</label>
+
+<input type="radio" id="mule" name="Animal" value="MULE">
+<label for="mule">mule</label>
+
+<input type="radio" id="LLAMA" name="Animal" value="LLAMA">
+<label for="LLAMA">llama</label>
+
+<input type="radio" id="CHICKEN" name="Animal" value="WCHICKENOLF">
+<label for="CHICKEN">poulet</label>
+
+<input type="radio" id="axolotl" name="Animal" value="AXOLOTL">
+<label for="axolotl">axolotl</label
+
+<input type="radio" id="bee" name="Animal" value="BEE">
+<label for="bee"></label>
+
+<input type="radio" id="bee" name="Animal" value="BEE">
+<label for="bee">abeille</label>
+
+<input type="radio" id="COW" name="Animal" value="COW">
+<label for="COW">vache</label>
+
+<input type="radio" id="FOX" name="Animal" value="FOX">
+<label for="FOX">renard</label>
+
+<input type="radio" id="FROG" name="Animal" value="FROG">
+<label for="FROG">grenouille</label>
+
+<input type="radio" id="GOAT" name="Animal" value="GOAT">
+<label for="GOAT">chèvre</label>
+
+<input type="radio" id="HOGLIN" name="Animal" value="HOGLIN">
+<label for="HOGLIN">hoglin</label>
+
+<input type="radio" id="MOOSHROOM" name="Animal" value="MOOSHROOM">
+<label for="MOOSHROOM">vache-champi</label>
+
+<input type="radio" id="OCELOT" name="Animal" value="OCELOT">
+<label for="OCELOT">mule</label>
+
+<input type="radio" id="PANDA" name="Animal" value="PANDA">
+<label for="PANDA">panda</label>
+
+<input type="radio" id="PIG" name="Animal" value="PIG">
+<label for="PIG">cheval-cochon</label>
+
+<input type="radio" id="POLAR_BEAR" name="Animal" value="POLAR_BEAR">
+<label for="POLAR_BEAR">ours polaire</label>
+
+<input type="radio" id="RABBIT" name="Animal" value="RABBIT">
+<label for="RABBIT">lapin</label>
+
+<input type="radio" id="SHEEP" name="Animal" value="SHEEP">
+<label for="SHEEP">mouton</label>
+
+<input type="radio" id="SNIFFER" name="Animal" value="SNIFFER">
+<label for="SNIFFER">sniffer</label>
+
+<input type="radio" id="STRIDER" name="Animal" value="STRIDER">
+<label for="STRIDER">strider</label
+
+<input type="radio" id="TURTLE" name="Animal" value="TURTLE">
+<label for="TURTLE">tortue</label>
+
+<input type="radio" id="TURTLE" name="Animal" value="TURTLE">
+<label for="TURTLE">tortue</label>
+
+<input type="radio" id="VILLAGER" name="Animal" value="VILLAGER">
+<label for="VILLAGER">villageois</label>
+
+<input type="radio" id="WANDERING_TRADER" name="Animal" value="WANDERING_TRADER">
+<label for="WANDERING_TRADER">marchand ambulant</label>
+
+<input type="radio" id="any" name="Animal" value="any">
+<label for="any">N'importe quel animal</label>
+
+
+
+</form>
+
+<p>Quantité d'animaux à nourrir</p>
+<textarea name="nourrir_q" id="nourrir_q" cols="10" rows="1"></textarea>
+
+<p>
+  Récompense (argent) :
+</p>
+<textarea name="nourrir_rec" id="nourrir_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="nourrir-id" id="nourrir-id" cols="10" rows="1"></textarea>  <br> <br> <br>
+
+<button id="nourrir_t">Valider</button>
+
+<script>
+let nourrir_t = document.getElementById("nourrir_t")
+
+nourrir_t.addEventListener('click', () => {
+  
+    console.log('Je suis cliqué');    
+    let nourrir_name= document.getElementById("nourrir-info").value;
+    let selectedAnimal = document.querySelector('input[name="Animal"]:checked');
+    let nourrir_Animal = selectedAnimal ? selectedAnimal.value : '';
+    let nourrir_rec = document.getElementById("nourrir_rec").value;
+    let nourrir_id = document.getElementById("nourrir-id").value;
+    let nourrir_q = document.getElementById("nourrir_q").value
+    let resultat = `endRewards:
+    - id: moneyReward
+      money: ${nourrir_rec}
+    scoreboard: false
+    startMessage: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+    name: apprivoiser ${nourrir_name}
+    endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+    manager:
+      branches:
+        '0':
+          stages:
+            '0':
+              entityType: ${nourrir_Animal}
+              amount: ${nourrir_q}
+              stageType: BREED
+          endingStages: {}
+    id: ${nourrir_id}`;
+  
+  navigator.clipboard.writeText(resultat)
+  nourrir_t.innerHTML = "Copié!"
+  });
+  
+  </script>
+
+  
+</body>
+</html>

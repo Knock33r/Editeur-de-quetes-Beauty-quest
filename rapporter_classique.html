@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<a href="index.html"><button>Accueil</button></a>
+
+<br>
+  <p>
+    Item à rapporter (Q + item):  
+  </p>
+  
+  <textarea name="rap_name" id="rap_name" cols="20" rows="1" placeholder="16 lingots de fer"></textarea>
+  
+  <p>
+    Item à rapporter (en anglais et en majuscule): 
+  </p>
+  <textarea name="rap_item" id="rap_item" cols="20" rows="1" placeholder="DIAMOND_SWORD"></textarea>
+
+  <p>
+    Quantité d'items :
+  </p>
+  <textarea name="rap_q" id="rap_q" cols="20" rows="1"></textarea>
+
+  <p>
+    Recompense (argent) : 
+  </p>
+
+  <textarea name="rap_rec" id="rap_rec" cols="20" rows="1"></textarea>
+
+  <p>  
+    doit on lui rendre l'item à la fin de la quete ?
+  </p>
+  <input type="radio" id="oui_rendre" name="rere" value="oui">
+  <label for="oui_rendre">Oui</label>
+        <br>
+  <input type="radio" id="non_rendre" name="rere" value="non">
+  <label for="non_rendre">Non</label>
+
+  <p>
+    Id de la quete :
+  </p>
+  <textarea name="rap_id" id="rap_id" cols="20" rows="1"></textarea> <br> <br> <br>
+
+
+  <button id="rap_t">Valider</button>
+
+
+  <script>
+
+    rap_t.addEventListener('click', () => {
+    let rap_t = document.getElementById("rap_t")
+    let selectedRep = document.querySelector('input[name="rere"]:checked');
+    let redonner_item  = selectedRep ? selectedRep.value : '';
+
+    let rap_name = document.getElementById("rap_name").value
+    let rap_item = document.getElementById("rap_item").value
+    let rap_rec = document.getElementById("rap_rec").value
+    let rap_id = document.getElementById("rap_id").value
+    let rap_q = document.getElementById("rap_q").value
+
+
+    if (redonner_item === "oui"){
+    let res = `  name: Enchanter et ramener ${rap_name} (il vous sera rendu)
+  scoreboard: false
+  startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+  endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+  endRewards:
+  - id: moneyReward
+    money: ${rap_rec}
+  manager:
+    branches:
+      '0':
+        stages:
+          '0':
+            npcID: citizens#25
+            items:
+            - ==: org.bukkit.inventory.ItemStack
+              v: 3700
+              type: ${rap_item}
+              amount: ${rap_q}
+            stageType: ITEMS
+            rewards:
+            - id: itemReward
+              items:
+              - v: 3700
+                type: ${rap_item}
+                amount: ${rap_q}
+        endingStages: {}
+  id: ${rap_id}`
+
+  navigator.clipboard.writeText(res)
+  rap_t.innerHTML = "Copié!"
+
+
+} else if (redonner_item === "non"){
+    let res = `  name: Enchanter et ramener ${rap_name}
+  scoreboard: false
+  startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+  endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+  endRewards:
+  - id: moneyReward
+    money: ${rap_rec}
+  manager:
+    branches:
+      '0':
+        stages:
+          '0':
+            npcID: citizens#25
+            items:
+            - ==: org.bukkit.inventory.ItemStack
+              v: 3700
+              type: ${rap_item}
+              amount: ${rap_q}
+            stageType: ITEMS
+        endingStages: {}
+  id: ${rap_id}`
+
+  navigator.clipboard.writeText(res)
+  rap_t.innerHTML = "Copié!"
+
+}
+    });
+
+  </script>
+
+
+
+
+
+  

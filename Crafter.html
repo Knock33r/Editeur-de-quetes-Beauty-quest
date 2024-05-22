@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<a href="index.html"><button>Accueil</button></a>
+
+<p>
+  Item a crafter (Q + type)
+</p>
+<textarea name="crafter_name" id="crafter_name" cols="20" rows="1" placeholder="ex: 35 roches"></textarea>
+<p>
+  Item à crafter (nom complet en anglais et en majuscule) : 
+</p>
+<textarea name="crafter_item" id="crafter_item" cols="20" rows="1"></textarea>
+<p>
+  Quantité d'items à crafter : 
+</p>
+<textarea name="crafter_q" id="crafter_q" cols="10" rows="1"></textarea> <br>
+<p>
+  Récompense (argent) : 
+</p>
+<textarea name="crafter_rec" id="crafter_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="Crafter_id" id="Crafter_id" cols="10" rows="1"></textarea> <br> <br> <br>
+
+
+<button class="Crafter_t" id="Crafter_t">Valider</button> <br> <br> <br>
+
+<script>
+
+Crafter_t.addEventListener('click', () => {
+let Crafter_t = document.getElementById("Crafter_t")
+let crafter_name = document.getElementById("crafter_name").value
+let crafter_rec = document.getElementById("crafter_rec").value
+let crafter_q = document.getElementById("crafter_q").value
+let crafter_item = document.getElementById("crafter_item").value
+let Crafter_id = document.getElementById("Crafter_id").value
+
+  let res = `endRewards:
+- id: moneyReward
+  money: ${crafter_rec}
+scoreboard: false
+startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+name: fabriquer ${crafter_name}
+endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+manager:
+  branches:
+    '0':
+      stages:
+        '0':
+          result:
+            v: 3700
+            type: ${crafter_item}
+            amount: ${crafter_q}
+          stageType: CRAFT
+      endingStages: {}
+id: ${Crafter_id}`
+
+navigator.clipboard.writeText(res)
+Crafter_t.innerHTML = "Copié!"
+  
+});
+</script>
+
+
+
+
+
+
+
+

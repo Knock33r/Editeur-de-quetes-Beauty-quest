@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete ff</title>
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<a href="index.html"><button>Accueil</button></a>
+
+
+<p>
+  Animaux à apprivoiser (Q + type):
+</p>
+<textarea name="apprivoiser-info" id="apprivoiser-info" cols="20" rows="1" placeholder="ex: 5 vaches"></textarea>
+<p>
+  Animal à apprivoiser
+</p>
+
+
+<form name="Animal" id="form_animal" action="Apprivoiser.html" method="post"></form>
+
+<input type="radio" id="loup" name="Animal" value="WOLF">
+<label for="loup">Loup</label>
+
+<input type="radio" id="chat" name="Animal" value="CAT">
+<label for="chat">Chat</label>
+
+<input type="radio" id="camel" name="Animal" value="CAMEL">
+<label for="camel">Chameau</label>
+
+<input type="radio" id="horse" name="Animal" value="HORSE">
+<label for="horse">Cheval</label>
+
+<input type="radio" id="donkey" name="Animal" value="DONKEY">
+<label for="donkey">Ane</label>
+
+<input type="radio" id="parrot" name="Animal" value="PARROT">
+<label for="parrot">Perroquet</label>
+
+<input type="radio" id="TRADER_LLAMA" name="Animal" value="TRADER_LLAMA">
+<label for="TRADER_LLAMA">llama de marchand ambulant</label>
+
+<input type="radio" id="ZOMBIE_HORSE" name="Animal" value="ZOMBIE_HORSE">
+<label for="ZOMBIE_HORSE">cheval-zombie</label>
+
+<input type="radio" id="SKELETON_HORSE" name="Animal" value="SKELETON_HORSE">
+<label for="SKELETON_HORSE">cheval-squelette</label>
+
+<input type="radio" id="mule" name="Animal" value="MULE">
+<label for="mule">mule</label>
+
+<input type="radio" id="LLAMA" name="Animal" value="LLAMA">
+<label for="LLAMA">llama</label>
+
+<input type="radio" id="any" name="Animal" value="any">
+<label for="any">N'importe quel animal</label>
+
+</form>
+
+<p>Quantité d'animaux à apprivoiser</p>
+<textarea name="apprivoiser_q" id="apprivoiser_q" cols="10" rows="1"></textarea>
+
+<p>
+  Récompense (argent) :
+</p>
+<textarea name="apprivoiser_rec" id="apprivoiser_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="apprivoiser-id" id="apprivoiser-id" cols="10" rows="1"></textarea>  <br> <br> <br>
+
+<button id="apprivoiser">Valider</button>
+
+<script>let apprivoiser = document.getElementById("apprivoiser")
+
+apprivoiser.addEventListener('click', () => {
+  
+    console.log('Je suis cliqué');    
+    let apprivoiser_name= document.getElementById("apprivoiser-info").value;
+    let selectedAnimal = document.querySelector('input[name="Animal"]:checked');
+    let apprivoiser_Animal = selectedAnimal ? selectedAnimal.value : '';
+    let apprivoiser_rec = document.getElementById("apprivoiser_rec").value;
+    let apprivoiser_id = document.getElementById("apprivoiser-id").value;
+    let apprivoiser_q = document.getElementById("apprivoiser_q").value
+    let resultat = `endRewards:
+    - id: moneyReward
+      money: ${apprivoiser_rec}
+    scoreboard: false
+    startMessage: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+    name: apprivoiser ${apprivoiser_name}
+    endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+    manager:
+      branches:
+        '0':
+          stages:
+            '0':
+              entityType: ${apprivoiser_Animal}
+              amount: ${apprivoiser_q}
+              stageType: TAME
+          endingStages: {}
+    id: ${apprivoiser_id}`;
+  
+  navigator.clipboard.writeText(resultat)
+  apprivoiser.innerHTML = "Copié!"
+  });
+  
+  </script>
+
+  
+</body>
+</html>

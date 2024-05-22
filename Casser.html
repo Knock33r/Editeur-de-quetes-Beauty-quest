@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Editeur de quete</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<a href="index.html"><button>Accueil</button></a>
+
+<br>
+<p>
+  Blocks à casser (Q + type)
+</p>
+<textarea name="casser_name" id="casser_name" cols="20" rows="1" placeholder="ex: 35 roches"></textarea>
+<p>
+  Block à casser (nom complet en anglais et en majuscule) : 
+</p>
+<textarea name="casser_block" id="casser_block" cols="20" rows="1"></textarea>
+<p>
+  Quantité de blocks à casser : 
+</p>
+<textarea name="casser_q" id="casser_q" cols="10" rows="1"></textarea> <br>
+<p>
+  Récompense (argent) : 
+</p>
+<textarea name="casser_rec" id="casser_rec" cols="10" rows="1"></textarea> <br>
+
+<p>id de la quete : </p>
+<textarea name="casser_id" id="casser_id" cols="10" rows="1"></textarea> <br> <br> <br>
+
+
+<button class="Casser_t" id="Casser_t">Valider</button> <br> <br> <br>
+
+<script>
+
+Casser_t.addEventListener('click', () => {
+
+    function entierAleatoire(min, max)
+  {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let Casser_t = document.getElementById("Casser_t")
+  let casser_name = document.getElementById("casser_name").value;
+  let casser_block = document.getElementById("casser_block").value;
+  let casser_rec = document.getElementById("casser_rec").value;
+  let casser_id = document.getElementById("casser_id").value;
+  var entier = entierAleatoire(1, 150000000) + ":";
+  let casser_q = document.getElementById("casser_q").value;
+
+  let res = `endRewards:
+- id: moneyReward
+  money: ${casser_rec}
+startMessage: §6<§eQuêtes§6> §aVous avez commencé la quête §e{quest_name}§a.
+name: casser ${casser_name}
+endMsg: §6<§eQuêtes§6> §aVous avez terminé la quête §e{quest_name}§a.
+manager:
+  branches:
+    '0':
+      stages:
+        '0':
+          objects:
+            ${entier}
+              amount: ${casser_q}
+              object: :${casser_block}
+          stageType: MINE
+      endingStages: {}
+id: ${casser_id}`
+
+navigator.clipboard.writeText(res)
+  Casser_t.innerHTML = "Copié!"
+  
+});
+</script>
+
+
+
+
